@@ -15,6 +15,9 @@
             <li>
                 <a class="nav-link" href="/services">Services <span class="sr-only">(current)</span></a>
             </li>
+            <li>
+                <a class="nav-link" href="/posts">Blog <span class="sr-only">(current)</span></a>
+            </li>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="#">Action</a>
                 <a class="dropdown-item" href="#">Another action</a>
