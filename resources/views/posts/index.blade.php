@@ -2,6 +2,7 @@
 
 @section('content')
     <h1>Posts</h1>
+    <input type="checkbox" checked data-toggle="toggle">
     @if(count($posts) > 0)
         @foreach ($posts as $post)
             <div class="card card-body bg-light">

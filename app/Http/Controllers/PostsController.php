@@ -183,9 +183,16 @@ class PostsController extends Controller
         $request->validate([
             'search' => 'required|min:3',
         ]);
-        
+
         $search = $request->input('search');
-        $posts = Post::where('title', 'like', "%$search%")->get();
+        $checkbox = $request->input('nameTable');
+        $dropdown = $request->input('dropdown');
+
+        if($checkbox == "kees"){
+            $posts = Post::where('body', 'like', "%$search%")->orderBy($dropdown, 'asc')->get();
+        } else {
+            $posts = Post::where('title', 'like', "%$search%")->orderBy($dropdown, 'desc')->get();
+        }
         
         return view('/posts/search')->with('posts', $posts);
     }
