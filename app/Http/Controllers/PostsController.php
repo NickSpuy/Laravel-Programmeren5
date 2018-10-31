@@ -177,4 +177,18 @@ class PostsController extends Controller
         $post->delete();
         return redirect('/posts')->with('succes', 'Post Removed');
     }
+
+    public function search(Request $request)
+    {
+        $request->validate([
+            'search' => 'required|min:3',
+        ]);
+        
+        $search = $request->input('search');
+        $posts = Post::where('title', 'like', "%$search%")->get();
+        
+        return view('/posts/search')->with('posts', $posts);
+    }
+
+    
 }

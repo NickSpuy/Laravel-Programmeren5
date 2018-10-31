@@ -19,7 +19,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body>
+<body style="margin-bottom: 10px">
     <div id="app">
             @include('inc.navbar')
             <div class="container">

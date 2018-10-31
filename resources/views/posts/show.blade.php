@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <a href="/posts" class="btn btn-default">Go Back</a>
+    <a href="/posts" class="btn btn-primary">Go Back</a>
     <h1>{{$post->title}}</h1>
     <img style="width:100%" src="/storage/cover_image/{{$post->cover_image}}">
     <br><br>
@@ -13,7 +13,7 @@
     <hr>
     @if(!Auth::guest())
         @if(Auth::user()->id == $post->user_id)
-            <a href="/posts/{{$post->id}}/edit" class="btn btn-default">Edit</a>
+            <a href="/posts/{{$post->id}}/edit" class="btn btn-primary">Edit</a>
 
             {!!Form::open(['action' => ['PostsController@destroy', $post->id], 'method' => 'Post', 'class' => 'float-right'])!!}
                 {{Form::hidden('_method', 'DELETE')}}
