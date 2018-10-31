@@ -29,3 +29,5 @@ Route::resource('posts', 'PostsController');
 Auth::routes();
 
 Route::get('/dashboard', 'DashboardController@index');
+
+Route::get('/admin', 'AdminController@admin')->middleware('is_admin')->name('admin');
