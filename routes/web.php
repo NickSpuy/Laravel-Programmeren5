@@ -26,8 +26,9 @@ Route::get('/services', 'PagesController@services');
 Route::get('/search', 'PostsController@search')->name('search');
 
 Route::resource('posts', 'PostsController');
+Route::resource('admin', 'AdminController');
 Auth::routes();
 
 Route::get('/dashboard', 'DashboardController@index');
 
-Route::get('/admin', 'AdminController@admin')->middleware('is_admin')->name('admin');
+Route::get('/admin', 'AdminController@admin')->name('admin');

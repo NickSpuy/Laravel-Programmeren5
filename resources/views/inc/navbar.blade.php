@@ -10,19 +10,11 @@
       <ul class="navbar-nav mr-auto">
         <li><a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a></li>
         <li><a class="nav-link" href="/posts">Blog <span class="sr-only">(current)</span></a></li>
-        <li><a class="nav-link" href="/posts/create">Create Post <span class="sr-only">(current)</span></a></li>
+        <li><a class="nav-link" href="/admin/create">Create Post <span class="sr-only">(current)</span></a></li>
       </ul>
 
       <!-- Right Side Of Navbar -->
       <ul class="navbar-nav ml-auto">
-        <form class="form-inline my-2 my-lg-0" action="{{ route('search') }}" method="GET">
-          <input class="form-check-input" type="checkbox" value="kees" name="nameTable" id="nameTable">
-              <select class="form-control" name="dropdown" id="dropdown">
-                <option value="title" name="dropdown" id="dropdown">Title</option>
-                <option value="created_at" name="dropdown" id="dropdown">Created At</option>
-              </select>
-          <input class="form-control mr-sm-2" value="{{request()->input('search')}}" name="search" id="search" type="search" placeholder="Search" aria-label="Search">
-        </form>
         
         <!-- Authentication Links -->
         @guest
