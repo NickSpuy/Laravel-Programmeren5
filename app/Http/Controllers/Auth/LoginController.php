@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -25,7 +26,24 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/dashboard';
+    
+
+     /**
+     * The user has been authenticated.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  mixed  $user
+     *
+     * @return mixed
+     */
+    protected function authenticated(Request $request, $user)
+    {       
+        if(auth()->user()->isAdmin()) {
+            return redirect()->intended('/admindashboard');
+        } elseif (auth()->user()->isUser()) {
+            return redirect()->intended('/dashboard');
+        }
+    }
 
     /**
      * Create a new controller instance.
