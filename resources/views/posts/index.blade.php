@@ -21,21 +21,20 @@
     </form>
 
     <h1>Posts</h1>
+    <div class="container">
     @if(count($posts) > 0)
-        @foreach ($posts as $post)
-            <div class="card card-body bg-light">
-                <div class="row">
-                    <div class="col-md-4 col-sm-4">
-                        <img style="width:100%" src="/storage/cover_image/{{$post->cover_image}}">
+        @foreach ($posts->chunk(3) as $chunk)
+            <div style="margin-bottom: 10px;" class="row">
+                @foreach ($chunk as $product)
+                    <div style="max-width: 360px;" class="col-sm">
+                        <img style="width:100%" src="/storage/cover_image/{{$product->cover_image}}">
+                        <h3><a href="/posts/{{$product->id}}">{{$product->title}}</a></h3>
                     </div>
-                    <div class="col-md-8 col-sm-8">
-                        <h3><a href="/posts/{{$post->id}}">{{$post->title}}</a></h3>
-                        <small>Written on {{$post->created_at}} by {{$post->user->name}}</small>
-                    </div>
-                </div>
-                
+                @endforeach
             </div>
+          
         @endforeach
+    </div>
         {{$posts->links()}}
     @else
         <p>No posts found</p>
