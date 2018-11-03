@@ -9,7 +9,7 @@
       <!-- Left Side Of Navbar -->
       <ul class="navbar-nav mr-auto">
         <li><a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a></li>
-        <li><a class="nav-link" href="/posts">Blog <span class="sr-only">(current)</span></a></li>
+        <li><a class="nav-link" href="/product">Blog <span class="sr-only">(current)</span></a></li>
         <li><a class="nav-link" href="/admin/create">Create Post <span class="sr-only">(current)</span></a></li>
       </ul>
 

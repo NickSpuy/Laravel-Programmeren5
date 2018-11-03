@@ -15,9 +15,10 @@ class IsAdmin
      */
     public function handle($request, Closure $next)
     {
-        if(auth()->user()->isAdmin()) {
-            return $next($request);
+        if (!auth()->check() || !$request->user()->isAdmin()) {
+            return redirect('')->with('error', 'Unauthorized Page!');
         }
-        return redirect('')->with('error', 'Unauthorized Page!');
+        return $next($request);
+        
     }
 }

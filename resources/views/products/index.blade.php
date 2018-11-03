@@ -10,8 +10,8 @@
           </div>
           <div class="col">
                 <select class="form-control" name="dropdown" id="dropdown">
-                    <option value="title" name="dropdown" id="dropdown">Title</option>
-                    <option value="created_at" name="dropdown" id="dropdown">Created At</option>
+                    <option value="name" name="dropdown" id="dropdown">Name</option>
+                    <option value="description" name="dropdown" id="dropdown">Description</option>
                 </select>
           </div>
           <div class="col-7">
@@ -22,20 +22,20 @@
 
     <h1>Posts</h1>
     <div class="container">
-    @if(count($posts) > 0)
-        @foreach ($posts->chunk(3) as $chunk)
+    @if(count($products) > 0)
+        @foreach ($products->chunk(3) as $chunk)
             <div style="margin-bottom: 10px;" class="row">
                 @foreach ($chunk as $product)
                     <div style="max-width: 360px;" class="col-sm">
-                        <img style="width:100%" src="/storage/cover_image/{{$product->cover_image}}">
-                        <h3><a href="/posts/{{$product->id}}">{{$product->title}}</a></h3>
+                        <img style="width:100%" src="/storage/product_image/{{$product->product_image}}">
+                        <h3><a href="/product/{{$product->id}}">{{$product->name}}</a></h3>
                     </div>
                 @endforeach
             </div>
           
         @endforeach
     </div>
-        {{$posts->links()}}
+        {{$products->links()}}
     @else
         <p>No posts found</p>
     @endif

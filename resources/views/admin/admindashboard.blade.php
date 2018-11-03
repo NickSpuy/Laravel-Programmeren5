@@ -7,20 +7,20 @@
                 <div class="card">
                     <div class="card-header">Dashboard</div>
                     <div class="card-body">
-                        <a href="/admin/create" class="btn btn-primary">Create Post</a>
-                        <h3>Your Blog Posts</h3>
-                        @if(count($posts) > 0)
+                        <a href="/admin/create" class="btn btn-primary">Add Product</a>
+                        <h3>Your Added Products</h3>
+                        @if(count($products) > 0)
                             <table class="table table-striped">
                                 <tr>
                                     <th>Title</th>
                                     <th></th>
                                     <th></th>
                                 </tr>
-                                @foreach($posts as $post)
+                                @foreach($products as $product)
                                     <tr>
-                                        <td>{{$post->title}}</td>
-                                        <td><a href="/posts/{{$post->id}}/edit" class="btn btn-primary">Edit</td>
-                                        <td>{!!Form::open(['action' => ['AdminController@destroy', $post->id], 'method' => 'Post', 'class' => 'float-right'])!!}
+                                        <td>{{$product->name}}</td>
+                                        <td><a href="/products/{{$product->id}}/edit" class="btn btn-primary">Edit</td>
+                                        <td>{!!Form::open(['action' => ['AdminController@destroy', $product->id], 'method' => 'Product', 'class' => 'float-right'])!!}
                                             {{Form::hidden('_method', 'DELETE')}}
                                             {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
                                             {!!Form::close()!!}

@@ -23,9 +23,13 @@ Route::get('/', 'PagesController@index');
 Route::get('/about', 'PagesController@about');
 Route::get('/services', 'PagesController@services');
 
-Route::get('/search', 'PostsController@search')->name('search');
+Route::get('/product', 'UserController@index');
+Route::get('/products', 'UserController@show');
 
-Route::resource('posts', 'PostsController');
+Route::get('/search', 'PagesController@search')->name('search');
+
+Route::resource('user', 'UserController');
+Route::resource('product', 'UserController');
 Route::resource('admin', 'AdminController');
 Auth::routes();
 

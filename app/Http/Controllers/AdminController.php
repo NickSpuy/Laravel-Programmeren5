@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Post;
+use App\Product;
 
 class AdminController extends Controller
 {
@@ -36,36 +36,39 @@ class AdminController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'title' => 'required',
-            'body' => 'required',
-            'cover_image' => 'image|nullable|max:1999' 
+            'name' => 'required',
+            'description' => 'required',
+            'price' => 'required',
+            'stock' => 'required',
+            'product_image' => 'image|nullable|max:1999' 
         ]);
 
         // Handle File Upload
-        if($request->hasFile('cover_image')){
+        if($request->hasFile('product_image')){
             // Get filename with ext
-            $filenameWithExt = $request->file('cover_image')->getClientOriginalName();
+            $filenameWithExt = $request->file('product_image')->getClientOriginalName();
             // Get filename
             $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
             // Get ext
-            $extension = $request->file('cover_image')->getClientOriginalExtension();
+            $extension = $request->file('product_image')->getClientOriginalExtension();
             // Filename to store
             $fileNameToStore = $filename.'_'.time().'.'.$extension;
             // Upload image
-            $path = $request->file('cover_image')->storeAs('public/cover_image', $fileNameToStore);
+            $path = $request->file('product_image')->storeAs('public/product_image', $fileNameToStore);
         } else {
             $fileNameToStore = 'noimage.jpg';
         }
 
         // Create Post
-        $post = new Post;
-        $post->title = $request->input('title');
-        $post->body = $request->input('body');
-        $post->user_id = auth()->user()->id;
-        $post->cover_image = $fileNameToStore;
-        $post->save();
+        $product = new Product;
+        $product->name = $request->input('name');
+        $product->description = $request->input('description');
+        $product->price = $request->input('price');
+        $product->stock = $request->input('stock');
+        $product->product_image = $fileNameToStore;
+        $product->save();
 
-        return redirect('/posts')->with('succes', 'Post Created');
+        return redirect('/products')->with('succes', 'Post Created');
     }
 
     /**
@@ -76,14 +79,9 @@ class AdminController extends Controller
      */
     public function edit($id)
     {
-        $post = Post::find($id);
+        $product = Product::find($id);
 
-        // Check for correct user
-        if(auth()->user()->id !==$post->user_id){
-            return redirect('/posts')->with('error', 'Unauthorized Page!');
-        }
-
-        return view('admin.edit')->with('post', $post);
+        return view('admin.edit')->with('product', $product);
     }
 
     /**
@@ -96,34 +94,41 @@ class AdminController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'title' => 'required',
-            'body' => 'required' 
+            'name' => 'required',
+            'description' => 'required',
+            'price' => 'required',
+            'stock' => 'required',
+            'product_image' => 'image|nullable|max:1999' 
         ]);
 
         // Handle File Upload
-        if($request->hasFile('cover_image')){
+        if($request->hasFile('product_image')){
             // Get filename with ext
-            $filenameWithExt = $request->file('cover_image')->getClientOriginalName();
+            $filenameWithExt = $request->file('product_image')->getClientOriginalName();
             // Get filename
             $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
             // Get ext
-            $extension = $request->file('cover_image')->getClientOriginalExtension();
+            $extension = $request->file('product_image')->getClientOriginalExtension();
             // Filename to store
             $fileNameToStore = $filename.'_'.time().'.'.$extension;
             // Upload image
-            $path = $request->file('cover_image')->storeAs('public/cover_image', $fileNameToStore);
+            $path = $request->file('product_image')->storeAs('public/product_image', $fileNameToStore);
+        } else {
+            $fileNameToStore = 'noimage.jpg';
         }
 
         // Create Post
-        $post = Post::find($id);
-        $post->title = $request->input('title');
-        $post->body = $request->input('body');
+        $product = new Product;
+        $product->name = $request->input('name');
+        $product->description = $request->input('description');
+        $product->price = $request->input('price');
+        $product->stock = $request->input('stock');
         if($request->hasFile('cover_image')){
-            $post->cover_image = $fileNameToStore;
+            $product->product_image = $fileNameToStore;
         }
-        $post->save();
+        $product->save();
 
-        return redirect('/posts')->with('succes', 'Post Updated');
+        return redirect('/posts')->with('succes', 'Post Created');
     }
 
     /**
@@ -134,18 +139,18 @@ class AdminController extends Controller
      */
     public function destroy($id)
     {
-        $post = Post::find($id);
+        $product = Product::find($id);
 
-        if(auth()->user()->id !==$post->user_id){
-            return redirect('/posts')->with('error', 'Unauthorized Page!');
+        if(auth()->user()->id !==$product->user_id){
+            return redirect('/products')->with('error', 'Unauthorized Page!');
         }
 
-        if($post->cover_image != 'noimage.jpg'){
+        if($product->product_image != 'noimage.jpg'){
             // Delete Image
-            Storage::delete('public/cover_image/'.$post->cover_image);
+            Storage::delete('public/product_image/'.$product->product_image);
         }
 
         $post->delete();
-        return redirect('/posts')->with('succes', 'Post Removed');
+        return redirect('/products')->with('succes', 'Product Removed');
     }
 }
