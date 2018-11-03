@@ -34,14 +34,23 @@ class PagesController extends Controller
         ]);
 
         $search = $request->input('search');
-        $checkbox = $request->input('nameTable');
-        $dropdown = $request->input('dropdown');
+        $checkbox = $request->input('stock');
+        $category = $request->input('category');
 
-        if($checkbox == "kees"){
-            $products = Product::where('description', 'like', "%$search%")->orderBy($dropdown, 'asc')->get();
+        if($category == "all"){
+            if($checkbox == "stock"){
+                $products = Product::where('name', 'like', "%$search%")->get();
+            } else {
+                $products = Product::where('name', 'like', "%$search%")->where('stock' > 0)->get();
+            }
         } else {
-            $products = Product::where('name', 'like', "%$search%")->orderBy($dropdown, 'desc')->get();
+            if($checkbox == "stock"){
+                $products = Product::where('name', 'like', "%$search%")->where('category', $category)->get();
+            } else {
+                $products = Product::where('name', 'like', "%$search%")->where('category', $category)->where('stock' > 0)->get();
+            }
         }
+        
         
         return view('/products/search')->with('products', $products);
     } 

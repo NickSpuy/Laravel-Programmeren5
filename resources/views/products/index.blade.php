@@ -6,12 +6,13 @@
         <div class="form-row">
           <div class="col">
                 <label for="nameTable">Check Body</label>
-                <input type="checkbox" value="kees" name="nameTable" id="nameTable">
+                <input type="checkbox" value="stock" name="stock" id="stock">
           </div>
           <div class="col">
-                <select class="form-control" name="dropdown" id="dropdown">
-                    <option value="name" name="dropdown" id="dropdown">Name</option>
-                    <option value="description" name="dropdown" id="dropdown">Description</option>
+                <select class="form-control" name="category" id="category">
+                    <option value="all" name="category" id="category">All categories</option>
+                    <option value="phone" name="category" id="category">Phone</option>
+                    <option value="laptop" name="category" id="category">Laptop</option>
                 </select>
           </div>
           <div class="col-7">
