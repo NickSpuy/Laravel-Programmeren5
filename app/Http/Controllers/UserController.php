@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Product;
+use App\User;
 
 class UserController extends Controller
 {
@@ -44,5 +45,23 @@ class UserController extends Controller
     {
         $products = Product::find($id);
         return view('products.show')->with('product', $products);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+        ]);
+
+        // Create Post
+        $user = new User;
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->password = $request->input('password');
+        $user->save();
+
+        return redirect('/posts')->with('succes', 'Post Created');
     }
 }

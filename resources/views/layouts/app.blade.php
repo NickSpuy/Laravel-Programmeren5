@@ -26,6 +26,12 @@
                 @include('inc.messages')
                 @yield('content')
             </div>
-    </div>
+    </div
+    
+    <script>
+    $('#myModal').on('shown.bs.modal', function () {
+    $('#myInput').trigger('focus')
+    })
+</script
 </body>
 </html>
