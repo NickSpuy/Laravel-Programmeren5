@@ -26,6 +26,8 @@ Route::get('/services', 'PagesController@services');
 Route::get('/product', 'UserController@index');
 Route::get('/products', 'UserController@show');
 
+Route::post('/order', 'AdminController@order');
+
 Route::get('/search', 'PagesController@search')->name('search');
 
 Route::resource('user', 'UserController');

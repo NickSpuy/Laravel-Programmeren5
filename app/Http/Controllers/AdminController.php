@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Product;
+use App\Order;
 
 class AdminController extends Controller
 {
@@ -70,6 +71,24 @@ class AdminController extends Controller
         $product->save();
 
         return redirect('/product')->with('succes', 'Post Created');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     * @param  int  $id
+     */
+    public function order(Request $request)
+    {
+        // Create order
+        $order = new Order;
+        $order->users_id = $users_id = auth()->user()->id;
+        $order->products_id = $request->input('productid');
+        $order->save();
+
+        return redirect('/product')->with('succes', 'Product Ordered!');
     }
 
     /**

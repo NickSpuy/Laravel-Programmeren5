@@ -34,11 +34,20 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    @if ($orders > 0)
-                        <label><input type="radio" name="optradio">Achteraf betalen</label>
-                    @else
-                        <label><input type="radio" name="optradio">IDEAL</label>
-                    @endif
+                        {!! Form::open(['action' => 'AdminController@order', $products->id, 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
+                        <div class="form-group">
+                            @if ($orders > 4)
+                                {{Form::label('achteraf', 'Achteraf betalen')}}
+                                {{Form::radio('name', 'value', false)}} 
+                                {{ Form::hidden('productid', $products->id) }}
+                            @else
+                                {{Form::label('ideal', 'IDEAL')}}
+                                {{Form::radio('name', 'value', false)}}
+                                {{ Form::hidden('productid', $products->id) }}
+                            @endif
+                        </div>
+                        {{Form::submit('Submit', ['class'=>'btn btn-primary'])}}
+                    {!! Form::close() !!}
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
