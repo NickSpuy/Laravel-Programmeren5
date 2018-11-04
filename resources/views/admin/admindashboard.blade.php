@@ -8,7 +8,8 @@
                     <div class="card-header">Dashboard</div>
                     <div class="card-body">
                         <a href="/admin/create" class="btn btn-primary">Add Product</a>
-                        <h3>Your Added Products</h3>
+                        <br><br>
+                        <h3>Products</h3>
                         @if(count($products) > 0)
                             <table class="table table-striped">
                                 <tr>
@@ -19,7 +20,7 @@
                                 @foreach($products as $product)
                                     <tr>
                                         <td>{{$product->name}}</td>
-                                        <td><a href="/products/{{$product->id}}/edit" class="btn btn-primary">Edit</td>
+                                        <td><a href="/admin/{{$product->id}}/edit" class="btn btn-primary">Edit</td>
                                         <td>{!!Form::open(['action' => ['AdminController@destroy', $product->id], 'method' => 'Product', 'class' => 'float-right'])!!}
                                             {{Form::hidden('_method', 'DELETE')}}
                                             {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}

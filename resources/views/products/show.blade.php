@@ -2,18 +2,18 @@
 
 @section('content')
     <a href="/products" class="btn btn-primary">Go Back</a>
-    <h1>{{$product->name}}</h1>
-    <img style="width:100%" src="/storage/product_image/{{$product->product_image}}">
+    <h1>{{$products->name}}</h1>
+    <img style="width:100%" src="/storage/product_image/{{$products->product_image}}">
     <br><br>
     <div>
-        {!!$product->description!!}
+        {!!$products->description!!}
     </div>
     <hr>
     <hr>
     @if(!Auth::guest())
         @if(Auth::user()->type == 'admin')
-            <a href="/admin/{{$product->id}}/edit" class="btn btn-primary">Edit</a>
-            {!!Form::open(['action' => ['AdminController@destroy', $product->id], 'method' => 'product', 'class' => 'float-right'])!!}
+            <a href="/admin/{{$products->id}}/edit" class="btn btn-primary">Edit</a>
+            {!!Form::open(['action' => ['AdminController@destroy', $products->id], 'method' => 'POST', 'class' => 'float-right'])!!}
                 {{Form::hidden('_method', 'DELETE')}}
                 {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
             {!!Form::close()!!}
@@ -34,7 +34,11 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    ...
+                    @if ($orders > 0)
+                        <label><input type="radio" name="optradio">Achteraf betalen</label>
+                    @else
+                        <label><input type="radio" name="optradio">IDEAL</label>
+                    @endif
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

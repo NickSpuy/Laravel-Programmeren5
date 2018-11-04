@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Product;
 
 class AdminController extends Controller
@@ -68,7 +69,7 @@ class AdminController extends Controller
         $product->product_image = $fileNameToStore;
         $product->save();
 
-        return redirect('/products')->with('succes', 'Post Created');
+        return redirect('/product')->with('succes', 'Post Created');
     }
 
     /**
@@ -123,12 +124,10 @@ class AdminController extends Controller
         $product->description = $request->input('description');
         $product->price = $request->input('price');
         $product->stock = $request->input('stock');
-        if($request->hasFile('cover_image')){
-            $product->product_image = $fileNameToStore;
-        }
+        $product->product_image = $fileNameToStore;
         $product->save();
 
-        return redirect('/posts')->with('succes', 'Post Created');
+        return redirect('/admindashboard')->with('succes', 'Post Created');
     }
 
     /**
@@ -141,16 +140,12 @@ class AdminController extends Controller
     {
         $product = Product::find($id);
 
-        if(auth()->user()->id !==$product->user_id){
-            return redirect('/products')->with('error', 'Unauthorized Page!');
-        }
-
         if($product->product_image != 'noimage.jpg'){
             // Delete Image
             Storage::delete('public/product_image/'.$product->product_image);
         }
 
-        $post->delete();
-        return redirect('/products')->with('succes', 'Product Removed');
+        $product->delete();
+        return redirect('/product')->with('succes', 'Product Removed');
     }
 }

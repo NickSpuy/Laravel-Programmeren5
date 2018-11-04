@@ -34,6 +34,6 @@ Route::resource('admin', 'AdminController');
 Auth::routes();
 
 Route::get('/dashboard', 'DashboardController@index');
-Route::get('/admindashboard', 'DashboardController@index');
+Route::get('/admindashboard', 'DashboardController@admin');
 
 Route::get('/admin', 'AdminController@admin')->name('admin');

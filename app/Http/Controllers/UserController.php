@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Product;
+use App\Order;
 use App\User;
 
 class UserController extends Controller
@@ -42,9 +43,11 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
+    { 
         $products = Product::find($id);
-        return view('products.show')->with('product', $products);
+        $users_id = auth()->user()->id;
+        $orders = Order::where('id', $users_id)->count();
+        return view('products.show')->with('products', $products)->with('orders', $orders);
     }
 
     public function update(Request $request, $id)
