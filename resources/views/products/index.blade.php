@@ -5,10 +5,6 @@
     <form action="{{ route('search') }}" method="GET">
         <div class="form-row">
           <div class="col">
-                <label for="nameTable">Check Body</label>
-                <input type="checkbox" value="stock" name="stock" id="stock">
-          </div>
-          <div class="col">
                 <select class="form-control" name="category" id="category">
                     <option value="all" name="category" id="category">All categories</option>
                     <option value="phone" name="category" id="category">Phone</option>

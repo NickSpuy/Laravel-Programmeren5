@@ -10,7 +10,7 @@
             <div class="card card-body bg-light">
                 <div class="row">
                     <div class="col-md-4 col-sm-4">
-                        <img style="width:100%" src="/storage/cover_image/{{$product->product_image}}">
+                        <img style="width:100%" src="/storage/product_image/{{$product->product_image}}">
                     </div>
                     <div class="col-md-8 col-sm-8">
                         <h3><a href="/products/{{$product->id}}">{{$product->name}}</a></h3>

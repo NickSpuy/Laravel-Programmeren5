@@ -41,13 +41,13 @@ class PagesController extends Controller
             if($checkbox == "stock"){
                 $products = Product::where('name', 'like', "%$search%")->get();
             } else {
-                $products = Product::where('name', 'like', "%$search%")->where('stock' > 0)->get();
+                $products = Product::where('name', 'like', "%$search%")->get();
             }
         } else {
             if($checkbox == "stock"){
                 $products = Product::where('name', 'like', "%$search%")->where('category', $category)->get();
             } else {
-                $products = Product::where('name', 'like', "%$search%")->where('category', $category)->where('stock' > 0)->get();
+                $products = Product::where('name', 'like', "%$search%")->where('category', $category)->get();
             }
         }
         
